@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class RegistrationsPage {
 
     private final String Form_Title = "Student Registration Form";
+
     private SelenideElement
             formTitle = $(".practice-form-wrapper"),
             firstnameInput = $("#firstName"),

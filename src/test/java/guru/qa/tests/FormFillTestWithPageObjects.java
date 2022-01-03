@@ -13,7 +13,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FormFillTestWithPageObjects extends TestBase {
+
     private Faker faker = new Faker();
+
     private final String
             email = faker.internet().emailAddress(),
             currentAddress = faker.address().streetAddress(),
@@ -66,7 +68,6 @@ public class FormFillTestWithPageObjects extends TestBase {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         registrationsPage
                 .checkResults("Student Name", "Amirkhan Omarkhanov");
-        sleep(5000);
     }
 }
 
