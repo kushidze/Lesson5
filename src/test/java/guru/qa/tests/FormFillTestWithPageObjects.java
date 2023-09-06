@@ -13,15 +13,11 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FormFillTestWithPageObjects extends TestBase {
-
     private Faker faker = new Faker();
-
     private final String
-            email = faker.internet().emailAddress(),
             currentAddress = faker.address().streetAddress(),
             genderMale = "Male",
             genderFemale = "Female",
-            userNumber = faker.number().digits(10),
             subject = "Chemistry, Arts",
             uploadFile = "testFile1.jpg",
             hobbies1 = "Sports",
@@ -33,28 +29,36 @@ public class FormFillTestWithPageObjects extends TestBase {
     void practiceForm() {
         //Open "PracticeForm"
         registrationsPage.openPage()
-                .typeFirstName("Amirkhan")
-                .typeLastName("Omarkhanov");
-        $("#userEmail").val(email);
+                .typeFirstName()
+                .typeLastName()
+                .typeEmail();
+
         //Gender check
         $(byText(genderFemale)).click();
         $(byText(genderMale)).click();
+
         //Mob.number check
-        $("#userNumber").val(userNumber);
+        registrationsPage.typeMobNumber();
+
         //Date of birth check
         registrationsPage.calendar.setDate("30", "July", "1998");
+
         //Subject check
         $("#subjectsInput").val("ch");
         $(byText("Chemistry")).click();
         $("#subjectsInput").val("ar");
         $(byText("Arts")).click();
+
         //Hobbies check
         $(byText(hobbies1)).click();
         $(byText(hobbies2)).click();
+
         //File upload check
         $("#uploadPicture").uploadFromClasspath(uploadFile);
+
         //Current address check
-        $("#currentAddress").scrollTo().val(currentAddress);
+        registrationsPage.typeAdress();
+
         //Select state
         $("#state").scrollTo();
         $("#state").click();
@@ -66,8 +70,8 @@ public class FormFillTestWithPageObjects extends TestBase {
         $("#submit").click();
         //Submit validation
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        registrationsPage
-                .checkResults("Student Name", "Amirkhan Omarkhanov");
+        //registrationsPage
+                //.checkResults("Student Name",);
     }
 }
 

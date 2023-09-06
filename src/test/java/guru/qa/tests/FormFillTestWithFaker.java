@@ -2,6 +2,7 @@ package guru.qa.tests;
 
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.CollectionCondition.itemWithText;
 import static com.codeborne.selenide.Condition.text;
@@ -43,7 +44,6 @@ public class FormFillTestWithFaker extends TestBase {
         //Mob.number check
         $("#userNumber").val(userNumber);
         //Date of birth check
-
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__year-select").selectOption("1992");
@@ -59,8 +59,9 @@ public class FormFillTestWithFaker extends TestBase {
         //File upload check
         $("#uploadPicture").uploadFromClasspath(uploadFile);
         //Current address check
-        $("#currentAddress").val(currentAddress);
+        $("#currentAddress").val(currentAddress).sendKeys(Keys.TAB);
         //Select state
+        $("#close-fixedban").click();
         $("#state").scrollTo();
         $("#state").click();
         $(byText(state)).click();
